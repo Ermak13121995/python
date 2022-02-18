@@ -1,9 +1,10 @@
-print('Введите натуральное число не превосходящее 1 000 000 000')
-number = int(input())
-first_num = number % 10
-second_num = number % 100 // 10
-third_num = number % 1000 // 100
+print('Введите целое трёхзначное число')
+a = int(input())
+b = a // 100
+c = a % 100 // 10
+d = a % 10
+summ = b + c + d
+multi = b * c * d
 
-result = first_num + second_num + third_num
-
-print('Сумма последних трёх чисел числа', number, 'равна', result)
+print('Сумма цифр числа', a, 'равна', summ)
+print('Произведение цифр числа', a, 'равна', multi)

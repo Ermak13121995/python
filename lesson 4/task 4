@@ -1,9 +1,9 @@
-print('Введите натуральное число не превосходящее 1 000 000 000')
-number = int(input())
-first_num = number % 10
-second_num = number % 100 // 10
-third_num = number % 1000 // 100
-
-result = first_num + second_num + third_num
-
-print('Сумма последних трёх чисел числа', number, 'равна', result)
+print('Сколько рублей стоит мяч?')
+r = int(input())
+print('А также сколько копеек?')
+k = int(input())
+print('Сколько мячей вы хотите купить?')
+n = int(input())
+result_rub = (float(r) + float(k) / 100) * n
+result_kop = int(result_rub * 100) % 100
+print('За', n, 'мяча нужно заплатить', int(result_rub), 'рублей и ', result_kop, 'копеек')

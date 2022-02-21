@@ -1,19 +1,11 @@
-number = int(input('Введите число от 0 до 36: '))
+from math import ceil
 
-if number == 0:
-    print('Число', number, 'соответствует зелёному цвету')
-    
-if number >= 1 and number <= 10 or number >= 19 and number <= 28:
-    if number % 2 == 0:
-        print('Число', number, 'чётное и соответствует чёрному цвету')
-    else:
-        print('Число', number, 'нечётное и соответствует красному цвету')
-        
-if number >= 11 and number <= 18 or number >= 29 and number <= 36:
-    if number % 2 == 0:
-        print('Число', number, 'чётное и соответствует красному цвету')
-    else:
-        print('Число', number, 'нечётное и соответствует чёрному цвету')
+print('Сколько задач вам задали?')
+k = int(input())
+print('Сколько задач в день вы решаете?')
+m = int(input())
 
-if number > 36 or number < 0:
-    print('Ошибка ввода. Вы ввели число вне диапазона')
+
+days = ceil(k / m)
+
+print('Чтобы решить все задания понадобится', days, 'дней')

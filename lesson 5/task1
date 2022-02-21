@@ -1,0 +1,9 @@
+print('Введите пароль')
+password = int(input())
+print('Повторите пароль')
+confirm = int(input())
+
+if password == confirm:
+    print('Всё ок!')
+else:
+    print('Пароли не совпадают')

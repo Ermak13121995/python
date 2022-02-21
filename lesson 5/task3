@@ -1,0 +1,17 @@
+print('введите 6-тизначное число вашего билита')
+lucky = int(input())
+
+first_num = lucky // 100000 % 10
+second_num = lucky // 10000 % 10
+third_num = lucky // 1000 % 10
+fourth_num = lucky % 1000 // 100
+fifth_num = lucky % 100 // 10
+sixth_num = lucky % 10
+
+left_summ = first_num + second_num + third_num
+right_summ = fourth_num + fifth_num + sixth_num
+
+if left_summ == right_summ:
+    print('Билет', lucky, 'счастливый')
+else:
+    print('Билет', lucky, 'НЕсчастливый')

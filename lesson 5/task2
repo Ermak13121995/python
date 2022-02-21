@@ -1,0 +1,11 @@
+print('Введите вещественное число')
+number = float(input())
+
+if number > 0 and number != 0:
+    print('Ваше число положительное')
+
+if number < 0 and number != 0:
+    print('Ваше число отрицательное')
+
+if number == 0:
+    print('Ваше число равно 0')

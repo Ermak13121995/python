@@ -6,4 +6,4 @@ confirm = int(input())
 if password == confirm:
     print('Всё ок!')
 else:
-    print('Пароли не совпадают')
+    print('Пароли не совпадают');

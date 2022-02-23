@@ -1,0 +1,7 @@
+mask = str(input('Введите название почты: '))
+
+if '@mail.ru' in mask:
+    print('Корректный')
+else:
+    print('Некорректный')
+    

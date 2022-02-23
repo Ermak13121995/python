@@ -1,0 +1,6 @@
+paragraph = str(input('Введите текст статьи: '))
+
+if 'Glo Academy' in paragraph:
+    print('YES')
+else:
+    print('NO')

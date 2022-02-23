@@ -1,0 +1,9 @@
+text_1 = str(input('Введите первую статью: '))
+text_2 = str(input('Введите вторую статью: '))
+text_3 = str(input('Введите третью статью: '))
+
+paragraph = [text_1, text_2, text_3]
+
+max_paragraph = max(paragraph, key=len)
+
+print("Наибольшая строка : " + max_paragraph)

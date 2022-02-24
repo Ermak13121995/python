@@ -1,0 +1,13 @@
+flag = 0
+n = int(input("Введите количество повторений: "))
+
+for i in range(n):
+    n = int(input('Введите число: '))
+    if n % 2 != 0:
+        flag = 1
+
+
+if flag != 0:
+    print('YES')
+else:
+    print('NO')

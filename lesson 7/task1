@@ -1,0 +1,4 @@
+text = str('Hello, GloAcademy!')
+
+for i in range(25):
+    print(text)

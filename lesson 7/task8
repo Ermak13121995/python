@@ -1,13 +1,20 @@
-number = int(input())
-minimum = int(input())
-maximum = int(input())
+maximum = 0
+minimum = 0
 
-for i in range(number):
-    n = int(input())
-    if n > maximum:
-        maximum = n
-    if n < minimum:
-        minimum = n
+number = int(input('Введите число >= 2: '))
 
-print('Минимум равен: ', minimum)
-print('Максимум равен: ', maximum)
+if number >= 2:
+   for i in range(number):
+      a = int(input())
+      
+      if maximum == 0 or a > maximum:
+         maximum = a
+
+      if minimum == 0 or a < minimum:
+         minimum = a
+
+   print('Минимум равен: ', minimum)
+   print('Максимум равен: ', maximum)
+      
+else:
+   print('Введённое число меньше двух')

@@ -1,20 +1,15 @@
-maximum = 0
-minimum = 0
+n = int(input('Введите количество элементов'))
 
-number = int(input('Введите число >= 2: '))
+tek_input = int(input('Введите очередное число последовательности: '))
+min = tek_input
+max = tek_input
 
-if number >= 2:
-   for i in range(number):
-      a = int(input())
-      
-      if maximum == 0 or a > maximum:
-         maximum = a
-
-      if minimum == 0 or a < minimum:
-         minimum = a
-
-   print('Минимум равен: ', minimum)
-   print('Максимум равен: ', maximum)
-      
-else:
-   print('Введённое число меньше двух')
+for i in range(1, n):
+    tek_input = int(input('Введите очередное число последовательности: '))
+    if tek_input < min
+        min = tek_input
+    if tek_input > max
+        max = tek_input
+        
+print('Минимум равен: ', min)
+print('Максимум равен: ', max)

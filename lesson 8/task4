@@ -1,0 +1,25 @@
+number = int(input('Введите натуральное число >=10 : '))
+minimum = number
+maximum = 0
+
+
+if number >= 10:
+    # задаем условие >= 10
+    while number != 0:
+        # пока число больше 0, цикла работает
+        last_digit = number % 10
+        # узнаем последнюю цифру
+        if last_digit < minimum:
+            minimum = last_digit
+            # если последняя цифра меньше начального числа то записываем её в минимум.
+            # потом идёт следующее сравнение с предыдущим значением
+        if last_digit > maximum:
+            maximum = last_digit
+        number = number // 10
+        # удадяем последнюю цифру числа
+        
+    print('Max = ', maximum)
+    print('Min = ', minimum)
+
+else:
+    print('Число не соответствует требованиям')

@@ -1,0 +1,13 @@
+a = int(input())
+number = a
+summ = 0
+
+while a != 0:
+    last_digit = a % 10
+    summ += last_digit
+    a = a // 10
+
+if number % summ == 0:
+    print('YES', number, '%', summ, '=', number % summ)
+else:
+    print('NO')

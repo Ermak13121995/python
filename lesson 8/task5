@@ -1,0 +1,23 @@
+num = int(input('Введите очередное число последовательности: ))
+first_num = num
+
+minus = 0
+plus = 0
+    
+while num != 0:
+    num = int(input('Введите очередное число последовательности: '))
+    if num < 0:
+        minus += 1
+    if num > 0:
+        plus += 1
+
+if first_num > 0:
+    plus += 1
+else:
+    minus += 1     
+       
+total = plus * minus
+
+print('Положительных чисел: ', plus)
+print('Отрицательных чисел: ', minus)
+print('Произведение положительных и отрицательных чисел равно ', total)

@@ -1,0 +1,12 @@
+num = int(input('Введите очередное число: '))
+total = num
+count = 0
+    
+while num != 0:
+    num = int(input('Введите очередное число: '))
+    total += num
+    count += 1
+
+midle = total / count
+print(total, count)
+print('Среднее арифметическое: ', midle)

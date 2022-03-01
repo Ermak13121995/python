@@ -1,0 +1,13 @@
+number = int(input('Введите число от 10 до 100: '))
+
+while number < 100:
+    number = int(input())
+
+    if number > 100:
+        print('Число больше 100, цикл прерван!')
+        break
+    
+    if number <= 10:
+        continue
+
+    print('Число соответствует условиям: ', number)

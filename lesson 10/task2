@@ -1,0 +1,8 @@
+s = str(input('Введите любой символ: '))
+
+answer = s.isdigit()
+
+if answer == 1:
+    print('YES')
+else:
+    print('NO')

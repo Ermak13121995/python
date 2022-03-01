@@ -1,0 +1,13 @@
+import re
+
+s = str(input('Введите букву: '))
+
+aplha = re.search(r'[^a-zA-Z а-яА-ЯёЁ]', s)
+
+answer = s.isupper()
+# Проверяем на регистр
+
+if answer == 1:
+    print('YES')
+else:
+    print('NO')

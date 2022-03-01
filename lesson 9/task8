@@ -1,0 +1,12 @@
+n = int(input('Введите число от 1 до 100: '))
+counter = 0
+
+for i in range(1, n + 1):
+   if i == 5 or i % 10 == 5 or 50 <= i <= 59:
+      counter += 1
+      print(i)
+
+if counter != 0:
+   print('Число 5 встречается', counter, 'раз(а)')
+else:
+   print('NO')

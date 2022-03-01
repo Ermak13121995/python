@@ -1,0 +1,17 @@
+n = int(input('Введите число: '))
+num = n
+
+total = 0
+result = 0
+
+while n != 0:
+    num = n % 10
+    total += num
+    n = n // 10
+
+    while total != 0:
+        num = total % 10
+        total = total // 10
+        result += total
+
+print('Цифровой корень равен: ', result)

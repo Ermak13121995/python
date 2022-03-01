@@ -1,0 +1,17 @@
+n = int(input('Введите число: '))
+sum_ = 0
+sum_2 = 0
+
+while n != 0:
+    num = n % 10 
+    sum_ = sum_ + num
+    n = n // 10 
+    while sum_ != 0:
+        num = sum_ % 10
+        sum_2 = sum_2 + num
+        sum_ = sum_ // 10
+
+if sum_2 > 10:
+    print(sum_2 % 10 + sum_2 // 10 % 10)
+else:
+    print(sum_2)

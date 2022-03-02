@@ -1,0 +1,15 @@
+s = str(input('Введите символ: '))
+
+islower = s.islower()
+isupper = s.isupper()
+code = ord(s)
+isalpha = s.isalpha()
+result = s
+
+if isalpha == 1:
+    if islower == 1:
+        print(result.upper())
+    if isupper == 1:
+        print(result.lower())
+else:
+    print(s)

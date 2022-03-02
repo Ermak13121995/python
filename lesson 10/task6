@@ -1,0 +1,11 @@
+s = str(input('Введите строку, содержащую цифры: '))
+
+check = s.isalnum()
+leng = len(s)
+
+if check == True:
+    for i in range(0, int(leng)):
+        if s[i].isdigit():
+            print(s[i])
+else:
+    print('Вы ввели символ!')

@@ -1,0 +1,6 @@
+list = 'D:/MyDocuments/Python/Courses/План обучения.txt'
+
+num = list.split('/')
+
+for i in range(0, len(num)):
+    print(num[i])

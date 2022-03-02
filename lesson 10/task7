@@ -1,0 +1,8 @@
+name = str(input(' Введите фамилию: '))
+second_name= str(input(' Введите фамилию : '))
+third_name = str(input(' Введите отчество: '))
+
+short_1 = str(second_name[0:1])
+short_2 = str(third_name[0:1])
+
+print(f'{name} {short_1}. {short_2}.', end='')

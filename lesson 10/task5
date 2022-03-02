@@ -1,0 +1,16 @@
+start = str(input('Введите первую букву: '))
+finish = str(input('Введите вторую букву: '))
+
+start_chr = ord(start)
+finish_chr = ord(finish)
+step = 1
+
+if start_chr > finish_chr:
+    step = -1
+    finish_chr -= 1
+else:
+    step = 1
+    finish_chr += 1
+
+for i in range(start_chr, finish_chr, step):
+    print(chr(i), end=' ')

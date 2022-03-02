@@ -1,0 +1,8 @@
+s = str(input('Введите строку: '))
+total = 0
+
+for i in range(0, len(s)):
+    if s[i] == ' ':
+        total += 1
+        
+print(f'Количество пробело в строке : {total}')

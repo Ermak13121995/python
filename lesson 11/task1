@@ -1,0 +1,14 @@
+s = int(input('Количество строк: '))
+
+note = []
+
+for i in range(0, s + 1):
+    keys = input('Ключевое слово: ').title()
+    note.append(keys)
+
+search = str(input('Введите запрос: ')).title()
+
+
+for i in range(0, len(note)):
+    if search == note[i]:
+        print(note[i])

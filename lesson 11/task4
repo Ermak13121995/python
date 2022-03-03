@@ -1,0 +1,9 @@
+text = input()
+listNum = text.split()
+flag = 0
+
+for i in range(len(listNum)):   
+    listNum2 = listNum[i + 1:] 
+    if listNum[i] != ' ':
+        flag += listNum2.count(listNum[i])
+print(flag)

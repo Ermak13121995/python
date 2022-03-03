@@ -1,0 +1,14 @@
+num = int(input('Введите количество товаров: '))
+
+def final_price(num):
+    fixed = 100
+    disc = 50
+    total = fixed
+    if num != 0:
+        if num > 1:
+            total = fixed + disc * (num-1)
+    return total
+
+result = final_price(num)
+
+print(result)

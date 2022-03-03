@@ -1,0 +1,19 @@
+num = input('Введите дату:  ').split('.')
+
+def star_date(num):
+    answer = 0
+    if num != 0:
+        elem = int(num[0]) * int(num[1])
+        year = ''.join(num[2])
+        short_year = int(year[2:4])
+        if elem == short_year:
+            answer = 1
+       
+        return answer
+
+result = star_date(num)
+
+if result == 1:
+    print('Звездная дата!')
+else:
+    print('Не звёздная дата!')

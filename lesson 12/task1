@@ -1,0 +1,13 @@
+num_1 = input('Первое число: ')
+num_2 = input('Второе число: ')
+
+def volt(n, m):
+    total = 0
+    total = len(n) * len(m)
+    
+    return total
+
+result = volt(num_1, num_2)
+
+print(result)
+    

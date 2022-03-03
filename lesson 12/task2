@@ -1,0 +1,16 @@
+line_first = input('Введите строку чисел: ').split()
+line_second = input('Введите строку чисел: ').split()
+
+def maximum(line):
+    max = 0
+    for i in range(len(line)):
+        if max < int(line[i]):
+            max = int(line[i])
+    return max
+
+f_max = maximum (line_first)
+s_max = maximum (line_second)
+
+result = f_max * s_max
+
+print(result)

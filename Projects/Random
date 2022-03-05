@@ -1,0 +1,66 @@
+
+import random
+
+total = 0
+
+maximum = int(input('Введите максимальную границу: '))
+
+
+def is_valid(user_input):
+    if user_input.isdigit():
+        user_number = int(user_input)
+        if user_number >= 1 and user_number <= maximum:
+            global total
+            total += 1
+            return True
+        else:
+            return False
+    else:
+        return False
+
+
+secret_number = random.randint(1, maximum)
+print('Добро пожаловать в игру')
+
+while True:
+    print(f'Введите число от 1 до {maximum}')
+    
+    user_input = input()
+    
+    if not is_valid(user_input):
+        continue
+        
+    user_number = int(user_input)
+    
+    if secret_number > user_number:
+        print('Загаданное число больше, чем введённое')
+    elif secret_number < user_number:
+        print('Загаданное число меньше, чем введённое')
+    else:
+        print('Ура! Вы угадали число!')
+        answer = str(input('Ещё? Введите yes/да или no/нет \n'))
+        if answer == 'no' or answer == 'нет':
+            break
+        elif answer == 'yes' or answer == 'да':
+            print('Прододжайте играть')
+            total = 0
+            secret_number = random.randint(1, maximum)
+        else:
+            print('Ваш ответ некорректный. До свидания!')
+            break
+            
+    if total > 7:
+        again = str(input('Попытки закончились. Попробовать ещё?'))
+        if again =='yes' or again =='да':
+            secret_number = random.randint(1, maximum)
+            total = 0
+        elif again =='no' or again =='нет':
+            break
+        else:
+            print('Ваш ответ некорректный. До свидания!')
+            break
+
+                  
+        
+print(f'Ваше количество попыток: {total}')
+print('Спасибо за игру! Ждём вас снова!')

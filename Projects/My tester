@@ -1,0 +1,50 @@
+questions = ['Сколько будет два на два умножить на два?',
+'Бревно нужно распилить на 10 частей, сколько нужно сделать распилов?',
+'На двух руках 10 пальцев, сколько пальцев на пяти руках?',
+'Укол делают каждые полчаса, сколько нужно минут для трех уколов?',
+'Пять свечей горело, две потухли. Сколько свечей осталось?']
+
+answers = [6,9,25,60,2]
+
+count_right_answers = 0
+wrongs = 0
+
+while True:
+    flag = 0
+    for i in range(len(questions)):
+        print(questions [i])
+        user_answer = int(input())
+        right_answer = answers[i]
+        total = 0
+        
+        if user_answer == right_answer:
+            count_right_answers += 1
+        else:
+            wrongs += 1
+  
+        total = count_right_answers + wrongs  
+    
+        if total == 5:
+            print(f'Правильных ответов: {count_right_answers}')
+            while True:
+                repeat = str(input('Попробовать ещё?'))
+                if repeat == 'да':
+                    count_right_answers = 0
+                    wrongs = 0
+                    total = 0
+                    print('Продолжим...')
+                    break
+                elif repeat == 'нет':
+                    print('До новых встреч')
+                    flag = 1
+                    break
+                else:
+                    print('Некорректный ввод')
+                    continue
+
+    if flag == 1:
+        break
+    
+    
+
+print(f'Тестирование окончено, правильных ответов: {count_right_answers}')

@@ -1,17 +1,54 @@
-questions = ['Сколько будет два на два умножить на два?',
+import random
+
+new_questions = ['Сколько будет два на два умножить на два?',
 'Бревно нужно распилить на 10 частей, сколько нужно сделать распилов?',
 'На двух руках 10 пальцев, сколько пальцев на пяти руках?',
 'Укол делают каждые полчаса, сколько нужно минут для трех уколов?',
 'Пять свечей горело, две потухли. Сколько свечей осталось?']
 
-answers = [6,9,25,60,2]
-
+new_answers = [6, 9, 25, 60, 2]
 count_right_answers = 0
 wrongs = 0
+answers = []
+questions = []
+
+def random_list(new_questions):
+    # Получаем рандомные индексы
+    item_index = list(range(0, len(new_questions)))
+    random.shuffle(item_index)
+
+    return item_index
+
+def new_list(new_list):
+    list = []
+    for i in range(0, len(new_list)):
+        list.append(new_list[item_index[i]])
+        
+    return list
+
+
+item_index = random_list(new_questions)
+questions = new_list(new_questions)
+answers = new_list(new_answers)
+
+
+
+def results(count_right_answers):
+    rating = ['Идиот', 'Кретин', 'Дурак', 'Нормальный', 'Талант', 'Гений']
+    
+    for i in range(len(questions) + 1):
+        if count_right_answers == i:
+            result = rating [i]
+            
+    return result
+
+name = str(input('Здравствуйте! Перед началом теста, пожалуйста, представьтесь: ')).title()
+
 
 while True:
     flag = 0
     for i in range(len(questions)):
+        print('Вопрос #', questions.index(questions [i]) +1)
         print(questions [i])
         user_answer = int(input())
         right_answer = answers[i]
@@ -25,13 +62,21 @@ while True:
         total = count_right_answers + wrongs  
     
         if total == 5:
-            print(f'Правильных ответов: {count_right_answers}')
+            
+            
             while True:
-                repeat = str(input('Попробовать ещё?'))
+                print('Правильных ответов:', count_right_answers)
+                result = results(count_right_answers)
+                print(f'{name}, ваш диагноз: {result}')
+                
+                repeat = str(input('Попробовать ещё?\n'))
                 if repeat == 'да':
                     count_right_answers = 0
                     wrongs = 0
                     total = 0
+                    item_index = random_list(new_questions)
+                    questions = new_list(new_questions)
+                    answers = new_list(new_answers)                    
                     print('Продолжим...')
                     break
                 elif repeat == 'нет':
@@ -47,4 +92,4 @@ while True:
     
     
 
-print(f'Тестирование окончено, правильных ответов: {count_right_answers}')
+print('Тестирование окончено')

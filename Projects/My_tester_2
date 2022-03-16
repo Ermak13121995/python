@@ -1,0 +1,136 @@
+import random
+
+new_questions = ['Сколько будет два на два умножить на два?',
+'Бревно нужно распилить на 10 частей, сколько нужно сделать распилов?',
+'На двух руках 10 пальцев, сколько пальцев на пяти руках?',
+'Укол делают каждые полчаса, сколько нужно минут для трех уколов?',
+'Пять свечей горело, две потухли. Сколько свечей осталось?']
+
+new_answers = [6, 9, 25, 60, 2]
+count_right_answers = 0
+wrongs = 0
+answers = []
+questions = []
+
+def random_list(new_questions):
+    # Получаем рандомные индексы
+    item_index = list(range(0, len(new_questions)))
+    random.shuffle(item_index)
+
+    return item_index
+
+def new_list(new_list):
+    list = []
+    for i in range(0, len(new_list)):
+        list.append(new_list[item_index[i]])
+        
+    return list
+
+
+item_index = random_list(new_questions)
+questions = new_list(new_questions)
+answers = new_list(new_answers)
+
+
+
+def results(count_right_answers, count_questions):
+    rating = ['Кретин', 'Дурак', 'Нормальный', 'Талант', 'Гений', 'Уникум']
+    persent_right_answers = (count_right_answers * 100 / count_questions // 20)
+
+            
+    return rating[int(persent_right_answers)]
+
+def save_result(name, count_right_answers, result):
+    file_name = 'your_result.txt'
+    file = open(file_name, 'a')
+
+    file.write(f'Имя: {name}, правильных ответов: {count_right_answers}, диагноз: {result}\n')
+    file.close()
+    
+def show_result():
+    file_name = 'your_result.txt'
+    file = open(file_name, 'r')
+
+    name = 'Имя'
+    count_right_answers = 'Правильных ответов'
+    result = 'Результат'
+    print(f'{name:15} {count_right_answers:21} {result:15}')
+
+    for line in file:
+        line = line.strip('\n')
+        values = line.split(',')
+        print(f'{values[0]:15}{values[1]:15}{values[2]:15}')
+
+
+name = str(input('Здравствуйте! Перед началом теста, пожалуйста, представьтесь: ')).title()
+
+
+while True:
+    flag = 0
+    count_questions = len(questions)
+    for i in range(len(questions)):
+        print('Вопрос #', questions.index(questions [i]) +1)
+        print(questions [i])
+        total = 0
+        right_answer = answers[i]
+        
+        user_answer = input()
+        while True:
+            if not user_answer.isdigit():
+                print('Введите число!')
+                user_answer = input()
+                continue
+            else:
+                break
+            
+        
+        if int(user_answer) == right_answer:
+            count_right_answers += 1
+        else:
+            wrongs += 1
+  
+        total = count_right_answers + wrongs
+        
+        if total == len(questions):
+            
+            
+            while True:
+                print('Правильных ответов:', count_right_answers)
+                result = results(count_right_answers, count_questions)
+                print(f'{name}, ваш диагноз: {result}')
+
+                save_result(name, count_right_answers, result)
+                
+                last_records = str(input('Показать предыдущий результат?\n'))
+                if last_records.lower() == 'да':
+                    show_result()
+                elif last_records.lower() == 'нет':
+                    print('Как хотите :(')
+                else:
+                    print('Некорректный ввод')
+                    continue                    
+
+                repeat = str(input('Попробовать ещё?\n'))
+                if repeat == 'да':
+                    count_right_answers = 0
+                    wrongs = 0
+                    total = 0
+                    item_index = random_list(new_questions)
+                    questions = new_list(new_questions)
+                    answers = new_list(new_answers)                    
+                    print('Продолжим...')
+                    break
+                elif repeat == 'нет':
+                    print('До новых встреч')
+                    flag = 1
+                    break
+                else:
+                    print('Некорректный ввод')
+                    continue
+
+    if flag == 1:
+        break
+    
+    
+
+print('Тестирование окончено')

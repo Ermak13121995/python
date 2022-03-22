@@ -1,0 +1,229 @@
+import random
+import os
+
+
+class FileProvider:
+    def get(self, path):
+        file = open(path, 'r')
+        data = file.read()
+        file.close()
+        return data
+    
+    def append(self, path, data):
+        file = open(path, 'a')
+        data = file.write(data)
+        file.close()
+        
+    def clear(self, path):
+        file = open(path, 'w')
+        data = file.write('')
+        file.close()
+    
+    def exists(self, path):
+        return os.path.exists(path)
+
+class Question:
+    def __init__(self, text, answer):
+        self.text = text
+        self.answer = answer
+
+class questionStorage:
+    def get_all(self):
+        file_name = 'questions.txt'
+        if not file_provider.exists(file_name):
+            questions = [Question('Сколько будет два на два умножить на два?', 6),
+                         Question('Бревно нужно распилить на 10 частей, сколько нужно сделать распилов?', 9),
+                         Question('На двух руках 10 пальцев, сколько пальцев на пяти руках?', 25),
+                         Question('Укол делают каждые полчаса, сколько нужно минут для трех уколов?', 60),
+                         Question('Пять свечей горело, две потухли. Сколько свечей осталось?', 2)
+                         ]
+            self.safe_questions(questions)
+            
+        data = file_provider.get(file_name).strip('\n')
+        data = data.split('\n')
+        questions = []
+        for line in data:
+            values = line.split('#')
+            question = Question(values[0], int(values[1]))
+            questions.append(question)
+                
+        return questions
+
+    def safe_questions(self, questions):
+        for question in questions:
+            self.add(question)
+        
+
+    def add(self, questions):
+        file_name = 'questions.txt'
+        data = f'{questions.text}#{questions.answer}\n'
+        file_provider.append(file_name, data)
+        
+    def remove(self, index):
+        questions = self.get_all()
+        questions.pop(index)
+        
+        file_name = 'questions.txt'
+        file_provider.clear(file_name)
+       
+        self.safe_questions(questions)
+
+
+    
+class User:
+    def __init__(self, name, count_right_answers=0, result='Неизвестно'):
+        self.name = name
+        self.count_right_answers = count_right_answers
+        self.result = result
+        
+    def accept_right_answer(self):
+        self.count_right_answers += 1
+
+    def set_result(self, result):
+        self.result = result
+
+def calculate_result(count_right_answers, count_questions):
+    results = ['Кретин', 'Дурак', 'Нормальный', 'Талант', 'Гений', 'Уникум']
+    persent_right_answers = (count_right_answers * 100 // count_questions // 20)
+
+    return results[persent_right_answers]
+
+def get_user_answer():
+    user_input = input()
+    
+    while not user_input.isdigit():
+        print('Введите число!')
+        user_input = input()
+    return int(user_input)
+
+
+def show_user_results():
+    name = 'Имя'
+    count_right_answers = 'Правильных ответов'
+    result = 'Результат'
+    print(f'{name:15} {count_right_answers:21} {result:15}')
+
+    users = usersResultStorage.get_all()
+    
+    for user in users:
+        print(f'{user.name:15}{user.count_right_answers:15}{user.result:15}')
+
+        
+class UsersResultStorage:
+    def safe(self, user):
+        file_name = 'your_result.txt'
+        data = f'{user.name}#{user.count_right_answers}#{user.result}\n'
+        
+        file_provider = FileProvider()
+        file_provider.append(file_name, data)
+
+    def get_all(self):
+        file_name = 'your_result.txt'
+        
+        file_provider = FileProvider()
+        data = file_provider.get(file_name).strip('\n')
+        data = data.split('\n')
+        users = []
+
+        for line in data:
+            values = line.split('#')
+            user = User(values[0], values[1], values[2])
+            users.append(user)
+
+        return users
+
+def add_new_question():
+    print('Введите текст вопроса')
+    text = input()
+    print ('Введите ответ на вопрос')
+    answer = get_user_answer()
+    new_question = Question(text, answer)
+    questionStorage.add(new_question)
+    
+def print_questions(questions):
+    print('------------------------')
+    for i in range(len(questions)):
+        print(f'{i+1}.{questions[i].text}')
+    
+    print('------------------------')
+    
+def remove_question():
+    questions = questionStorage.get_all()
+    while True:
+        print('Выберите номер вопроса, который нужно удалить')
+        
+        print_questions(questions)
+        
+        user_answer = get_user_answer()
+        
+        if user_answer < 1 or user_answer > len(questions):
+            continue
+        
+        questionStorage.remove(user_answer - 1)
+        
+        print(f'Ура, вопрос номер {user_answer} успешно удалён')
+        break
+
+
+        
+    
+
+# remove question
+file_provider = FileProvider()
+questionStorage = questionStorage()
+usersResultStorage = UsersResultStorage()
+
+while True:
+
+    questions = questionStorage.get_all()
+    count_questions = len(questions)
+
+    print('Здравствуйте. Как вас зовут? ')
+    user_name = input()
+    user = User(user_name)
+    
+    for i in range(len(questions)):
+        print('Вопрос №', i + 1)
+        
+        random_index = random.randint(0, len(questions) - 1)
+        print(questions[random_index].text)
+
+        user_answer = get_user_answer()
+
+        right_answer = questions[random_index].answer
+        if user_answer == right_answer:
+            user.accept_right_answer()
+
+        questions.pop(random_index)
+        
+    print('Количество правильных ответов =', user.count_right_answers)
+
+    result = calculate_result(user.count_right_answers, count_questions)
+    user.set_result(result)
+    print(f'{user_name}, ваш результат: {result}')
+
+    usersResultStorage.safe(user)
+
+    print('Хотите посмотреть результаты предыдущих игр? Для этого отправьте ДА')
+    user_answer = input()
+    if user_answer.upper() == 'ДА':
+        show_user_results()
+        
+    print('Хотите добавить новый вопрос? Для этого отправьте ДА')
+    user_answer = input()
+    if user_answer.upper() == 'ДА':
+        add_new_question()
+        
+    print('Хотите удалить вопрос? Для этого отправьте ДА')
+    user_answer = input()
+    if user_answer.upper() == 'ДА':
+        remove_question()
+
+    print('Хотите сыграть заново? Для этого отправьте ДА')
+    user_answer = input()
+    
+    if user_answer.upper() != 'ДА':
+        break
+    
+print('Тестирование закончено!')
+

@@ -2,6 +2,8 @@ import random
 import os
 
 
+# -*- coding: utf-8 -*-
+
 class FileProvider:
     def get(self, path):
         file = open(path, 'r')

@@ -1,0 +1,123 @@
+import pygame
+import random
+import time
+
+# Родительский класс шарика
+class Ball:
+    def __init__(self, display):
+        self.display = display
+        self.color = pygame.Color('red')
+        self.center_x = 100
+        self.center_y = 100
+        self.radius = 30
+
+        self.vx = 2
+        self.vy = 2
+
+    # Вывести шарик
+    def show(self):
+        pygame.draw.circle(self.display, self.color, (self.center_x, self.center_y), self.radius)
+
+    # Присваиваем координаты клика мышью по окну желтому шарику
+    def go(self):
+        self.center_x += self.vx
+        self.center_y += self.vy
+
+    # Закрашиваем белым  предыдущие иттерации анимации шарика
+    def clear(self):
+        pygame.draw.circle(self.display, pygame.Color('white'), (self.center_x, self.center_y), self.radius)
+
+    # Движение шарика
+    def move(self):
+        self.clear()
+        self.go()
+        self.show()
+
+    # Нулевая скорость движения
+    def stop(self):
+        self.vx = 0
+        self.vy = 0
+        
+
+# Генерируем рандомное положение шарика( шарик не выходит за границы окна)
+class RandomPointBall(Ball):
+    def __init__(self, display):
+        super().__init__(display)
+        
+        self.color = pygame.Color('green')
+        
+        width, height = display.get_size()
+        self.center_x = random.randint(self.radius, width - self.radius)
+        self.center_y = random.randint(self.radius, height - self.radius)
+
+# Закрашиваем желтым место клика по окну
+class PointBall(Ball):
+    def __init__(self, display, x, y):
+        super().__init__(display)
+        
+        self.color = pygame.Color('yellow')
+        
+        self.center_x = x
+        self.center_y = y
+
+# Задаём шарикам начальную скорость
+class RandomPointMovebleBall(RandomPointBall):
+    def __init__(self, display):
+        super().__init__(display)
+        
+        self.vx = random.choice([-1, 1])
+        self.vy = random.choice([-1, 1])
+
+
+# Инициализируем начало игры
+pygame.init()
+counter = 0
+# Задаём размеры, цвет окна, а также генерируем 10 шаров синего цвета
+width = 700
+height = 400
+display = pygame.display.set_mode((width, height))
+display.fill(pygame.Color('white'))
+
+balls = []
+for i in range(10):
+    ball = RandomPointMovebleBall(display)  # рандомное движение шара
+    ball.show()  # Выводим шарик
+    balls.append(ball)  # добавляем каждый шарик в массив balls
+
+pygame.display.flip()  # Обновляет игровую область
+
+score = 0
+
+time.sleep(0)
+
+clock = pygame.time.Clock()  # Делаем заморозку в 2 секунды
+while score == 0:
+    event_list = pygame.event.get()  # Получаем все события внутри pygame
+
+    # Создаёт анимацию движения
+    for ball in balls:
+        ball.move()
+    # Обновляем игровую область
+    pygame.display.flip()
+    # Плавность 60 кадров в секунду
+    clock.tick(60)
+        
+    for event in event_list:
+        # Отслеживаем выход из игры
+        if event.type == pygame.QUIT:
+            pygame.quit()
+        # Отслеживаем нажатие мышью по игровой области
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            for ball in balls:
+                ball.stop()
+                if 28 <= ball.center_x <= width - 28 and 28 <= ball.center_y <= height - 28:
+                    score += 1
+                    print(f'Шариков в зоне: {score}')
+
+
+
+    # Обновляем игровую область
+    pygame.display.flip()
+    # Плавность 60 кадров в секунду
+    clock.tick(60)
+

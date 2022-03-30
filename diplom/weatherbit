@@ -1,0 +1,27 @@
+import requests
+import json
+
+
+while True:
+    api_key = "27203866bd5a4f82a5cafe9f9eb0add1"
+    
+    city = input("Введите любой город, чтобы узнать погоду : ")
+
+    if city.isalpha():
+        url = f'https://api.weatherbit.io/v2.0/current?key={api_key}&city={city}'
+        response = requests.get(url)
+        
+        x = response.json()
+        
+        print(response)
+        
+        
+        if response.ok:
+            print('В городе ', city, ' сейчас: ', x['data'][0]['temp'], ' градуса(ов)')
+            print('Ощущается как :', x['data'][0]['app_temp'], ' градуса(ов)')
+            print('Скорость ветра :', x['data'][0]['wind_spd'], ' м/с')
+        else:
+            print('Такого города нет')
+    else:
+        print('Название не должно быть без чисел, пробелов и символов')
+        continue        

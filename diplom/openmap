@@ -1,0 +1,27 @@
+import requests
+import json
+
+
+while True:
+    api_key = "039db85edf63db9d39ccf20da91ff974"
+    base_url = "http://api.openweathermap.org/data/2.5/weather?"
+    units = 'metric'
+    
+    city = input("Введите название города(одним словом) : ").strip()
+
+    if city.isalpha():
+        complete_url = f'{base_url}&q={city}&appid={api_key}&units={units}'
+        response = requests.get(complete_url)
+        
+        x = response.json()
+        
+        
+        if response.ok:
+            print('В городе ', city, ' сейчас: ', x['main']['temp'], ' градуса(ов)')
+            print('Ощущается как :', x['main']['feels_like'], ' градуса(ов)')
+            print('Скорость ветра :', x['wind']['speed'], ' м/с')
+        else:
+            print('Такого города нет')
+    else:
+        print('Название не должно быть без чисел, пробелов и символов')
+        continue

@@ -17,11 +17,17 @@ while True:
         
         
         if response.ok:
-            print('В городе ', city, ' сейчас: ', x['main']['temp'], ' градуса(ов)')
-            print('Ощущается как :', x['main']['feels_like'], ' градуса(ов)')
-            print('Скорость ветра :', x['wind']['speed'], ' м/с')
+            print('В городе ', city.title(), ' сейчас: ', x['main']['temp'], ' градуса(ов)')
         else:
             print('Такого города нет')
     else:
         print('Название не должно быть без чисел, пробелов и символов')
         continue
+    
+    answer = input('Хотите продолжить? \nВведите "нет" или "да": \n').lower()
+    
+    if answer == 'да':
+        print('Продолжим...')
+    else:
+        print('До новых встреч!')
+        break
